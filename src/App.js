@@ -1,17 +1,42 @@
 import React, { Component } from "react";
 import "./App.css";
 import ValidationComponent from "./ValidationComponent";
+import CharComponent from "./CharComponent";
 
 class App extends Component {
   state = {
-    textLength: 0
+    textLength: 0,
+    inputValue: ""
   };
   inputLength = e => {
-    let textLength = this.state.textLength;
-    textLength = e.target.value.length;
-    this.setState({ textLength: textLength });
+    let text = e.target.value;
+    this.setState({ textLength: text.length, inputValue: text });
+  };
+  deleteChar = id => {
+    const chars = this.state.inputValue.split("");
+    chars.splice(id, 1);
+    this.setState({ inputValue: chars.join("") });
   };
   render() {
+    const letters = this.state.inputValue.split("");
+    let tiles = null;
+    if (letters) {
+      tiles = (
+        <div>
+          {letters.map((char, idx) => {
+            return (
+              <CharComponent
+                deleteChar={this.deleteChar}
+                key={idx}
+                id={idx}
+                letter={char}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <ol>
@@ -30,12 +55,12 @@ class App extends Component {
             minimum length)
           </li>
           <li>
-            [ * ] Create another component (=> CharComponent) and style it as an
+            [ √ ] Create another component (=> CharComponent) and style it as an
             inline box (=> display: inline-block, padding: 16px, text-align:
             center, margin: 16px, border: 1px solid black).
           </li>
           <li>
-            [ * ] Render a list of CharComponents where each CharComponent
+            [ √ ] Render a list of CharComponents where each CharComponent
             receives a different letter of the entered text (in the initial
             input field) as a prop.
           </li>
@@ -49,6 +74,7 @@ class App extends Component {
           onChange={this.inputLength}
           type="text"
           placeholder="Eg: Start somewhere!"
+          value={this.state.inputValue}
         />
         <br></br>
         <small>
@@ -56,6 +82,7 @@ class App extends Component {
           {this.state.textLength <= 0 ? "character" : "characters"}
         </small>
         <ValidationComponent textLength={this.state.textLength} />
+        {tiles}
       </div>
     );
   }
