@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import ValidationComponent from "./ValidationComponent";
 
 class App extends Component {
   state = {
@@ -20,11 +21,11 @@ class App extends Component {
             in a paragraph).
           </li>
           <li>
-            [ * ] Create a new component (=> ValidationComponent) which receives
+            [ √ ] Create a new component (=> ValidationComponent) which receives
             the text length as a prop
           </li>
           <li>
-            [ * ] Inside the ValidationComponent, either output "Text too short"
+            [ √ ] Inside the ValidationComponent, either output "Text too short"
             or "Text long enough" depending on the text length (e.g. take 5 as a
             minimum length)
           </li>
@@ -43,12 +44,18 @@ class App extends Component {
             entered text.
           </li>
         </ol>
-        <input onChange={this.inputLength} type="text" />
+        <h5>Enter a quote sixteen characters long.</h5>
+        <input
+          onChange={this.inputLength}
+          type="text"
+          placeholder="Eg: Start somewhere!"
+        />
         <br></br>
         <small>
           You've entered {this.state.textLength}{" "}
           {this.state.textLength <= 0 ? "character" : "characters"}
         </small>
+        <ValidationComponent textLength={this.state.textLength} />
       </div>
     );
   }
