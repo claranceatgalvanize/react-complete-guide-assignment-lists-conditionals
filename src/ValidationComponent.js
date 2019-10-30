@@ -1,8 +1,10 @@
 import React from "react";
 
 const ValidationComponent = ({ textLength }) => {
+  const style = {
+    marginBottom: "1em"
+  };
   let say;
-
   if (textLength === 16) {
     say = "Well done! you've entered the right amount of characters";
   } else if (textLength <= 0) {
@@ -14,8 +16,8 @@ const ValidationComponent = ({ textLength }) => {
   }
 
   return (
-    <div>
-      <p>{say}</p>
+    <div style={style}>
+      <small>{say}</small>
     </div>
   );
 };

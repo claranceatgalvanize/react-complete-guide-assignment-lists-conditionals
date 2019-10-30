@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import ValidationComponent from "./ValidationComponent";
 import CharComponent from "./CharComponent";
+import Qoute from "./Qoute";
 
 class App extends Component {
   state = {
@@ -27,18 +28,25 @@ class App extends Component {
       );
     });
 
+    let quote = null;
+    if (this.state.inputValue.length > 0) {
+      quote = <Qoute qoute={this.state.inputValue} />;
+    }
+
     return (
       <div className="App">
+        {quote}
         <h5>Enter a quote sixteen characters long.</h5>
         <input
           onChange={this.handleInput}
           type="text"
           value={this.state.inputValue}
+          placeholder="Start typing..."
+          maxlength="17"
         />
         <br></br>
         <small>
-          You've entered {this.state.inputValue.length}{" "}
-          {this.state.inputValue.length <= 0 ? "character" : "characters"}
+          You've entered {this.state.inputValue.length} of 16 characters
         </small>
         <ValidationComponent textLength={this.state.inputValue.length} />
         {tiles}

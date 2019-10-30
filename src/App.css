@@ -1,13 +1,14 @@
 .App {
   text-align: center;
   background: #fff;
-  width: 40em;
+  width: 30em;
   padding: 1em;
   height: 80vh;
   overflow-y: scroll;
   text-transform: uppercase;
   box-shadow: 0 10em 15em 0 #ccc;
   border: 0.01em solid #eee;
+  position: relative;
 }
 .App h5 {
   font-size: 1.3em;
@@ -23,6 +24,9 @@ p {
   text-align: center;
   width: 50%;
   font-size: 0.8em;
+  color: #999;
+}
+.App input placeholder {
   color: #999;
 }
 .App input:focus {
